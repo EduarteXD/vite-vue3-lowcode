@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { renderSlot, useSlots, watchEffect } from 'vue';
 import { Col, Row, Skeleton } from 'vant';
-// import styleModule from './index.module.scss';
+import styleModule from './index.module.scss';
 import type { VisualEditorComponent } from '@/visual-editor/visual-editor.utils';
 import {
   createEditorInputNumberProp,
@@ -17,18 +15,17 @@ interface SlotItem {
 
 const slotsTemp = {} as any;
 
-const createSlots = (str: string): SlotItem =>
-  str.split(':').reduce(
-    (prev, curr, index) => {
-      prev[`slot${index}`] = {
-        key: `slot${index}`,
-        span: curr,
-        children: [],
-      };
-      return prev;
-    },
-    { value: str },
-  );
+const createSlots = (num: number): SlotItem => {
+  const res = { value: '24' } as SlotItem;
+  for (let i = 0; i < num; i++) {
+    res[`slot${i}`] = {
+      children: [],
+      key: `slot${i}`,
+      span: '24',
+    };
+  }
+  return res;
+};
 
 export default {
   key: 'header',
@@ -72,11 +69,16 @@ export default {
       }
     });
 
+    watchEffect(() => {
+      props.slots = createSlots(props.row);
+    }, props.row);
+
     return () => (
-      <div
+      <Row
         ref={(el) => registerRef(el, block._vid)}
         {...custom}
         {...props}
+        class={styleModule.vanRow}
         style={{
           ...styles,
           background: `url(${props.background})`,
@@ -85,30 +87,15 @@ export default {
         }}
       >
         {Array.from({ length: props.row }, (_, index) => {
-          slotsTemp[block._vid][`slot${index}`] = <></>;
           return (
             <>
-              <Row style={{ height: '100px' }} key={index}>
+              <Col span="24" key={index}>
                 {renderSlot(slots, `slot${index}`)}
-              </Row>
+              </Col>
             </>
           );
         })}
-        {/*
-        <Row ref={(el) => registerRef(el, block._vid)} {...custom} {...props}>
-          {Object.values(Object.keys(props.slots).length ? props.slots : createSlots('12:12'))
-            ?.filter((item) => typeof item !== 'string')
-            .map((spanItem: SlotItem, spanIndex) => {
-              slotsTemp[block._vid][`slot${spanIndex}`] = spanItem;
-              return (
-                <>
-                  <Col span={spanItem.span}>{renderSlot(slots, `slot${spanIndex}`)}</Col>
-                </>
-              );
-            })}
-        </Row>
-        */}
-      </div>
+      </Row>
     );
   },
   resize: {
