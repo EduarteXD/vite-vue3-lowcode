@@ -12,7 +12,9 @@
       <el-tab-pane :name="tabItem.name" lazy>
         <template #label>
           <div class="tab-item">
-            <el-icon :size="26"><component :is="tabItem.icon" /></el-icon>
+            <el-icon :size="26">
+              <component :is="tabItem.icon" />
+            </el-icon>
             {{ tabItem.label }}
           </div>
         </template>
@@ -39,8 +41,8 @@
       return { label, icon, name, order, comp: component };
     })
     .sort((a, b) => a.order - b.order);
-
-  const activeName = ref(tabs[0].name);
+  // FIXME: tabs 2 -> 0
+  const activeName = ref(tabs[2].name);
 </script>
 
 <style lang="scss" scoped>

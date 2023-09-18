@@ -80,7 +80,7 @@ module.exports = {
     'vue/one-component-per-file': 'off',
 
     // prettier
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'off',
 
     // import
     'import/first': 'error',
