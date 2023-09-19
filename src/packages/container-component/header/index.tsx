@@ -105,11 +105,11 @@ export default {
   props: {
     background: createEditorInputProp({
       label: '背景图片',
-      defaultValue: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      defaultValue: '', // https://img.yzcdn.cn/vant/cat.jpeg
     }),
     row: createEditorInputNumberProp({
       label: '行数',
-      defaultValue: 2,
+      defaultValue: 1,
       min: 1,
     }),
   },

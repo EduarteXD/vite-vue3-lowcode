@@ -54,8 +54,8 @@ export default {
       label: '文本',
       defaultValue: '文本',
     }),
-    width: createEditorInputProp({ label: '宽度', defaultValue: 100 }),
-    height: createEditorInputProp({ label: '高度', defaultValue: 100 }),
+    width: createEditorInputProp({ label: '宽度', defaultValue: '' }),
+    height: createEditorInputProp({ label: '高度', defaultValue: '' }),
     errorIcon: createEditorInputProp({
       label: '失败时提示的图标名称或图片链接',
     }),
