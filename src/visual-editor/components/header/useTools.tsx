@@ -10,13 +10,11 @@ import { ElMessage, ElRadio, ElRadioGroup } from 'element-plus';
 import { useQRCode } from '@vueuse/integrations/useQRCode';
 import { useClipboard } from '@vueuse/core';
 import {
-  DocumentCopy,
   Cellphone,
   RefreshLeft,
   RefreshRight,
   Position,
   Delete,
-  ChatLineSquare,
   Download,
   Upload,
 } from '@element-plus/icons-vue';
@@ -112,18 +110,6 @@ export const useTools = () => {
         },
       },
       {
-        title: '复制页面',
-        icon: DocumentCopy,
-        onClick: () => {
-          ElMessage({
-            showClose: true,
-            type: 'info',
-            duration: 2000,
-            message: '敬请期待！',
-          });
-        },
-      },
-      {
         title: '撤销',
         icon: RefreshLeft,
         onClick: () => {
@@ -165,13 +151,6 @@ export const useTools = () => {
         onClick: () => {
           localStorage.setItem(localKey, JSON.stringify(jsonData));
           window.open(location.href.replace('/#/', '/preview/#/'));
-        },
-      },
-      {
-        title: '反馈',
-        icon: ChatLineSquare,
-        onClick: () => {
-          window.open('https://github.com/buqiyuan/vite-vue3-lowcode/issues/new');
         },
       },
     ];
