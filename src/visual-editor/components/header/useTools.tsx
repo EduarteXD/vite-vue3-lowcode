@@ -7,18 +7,9 @@
  */
 import { reactive } from 'vue';
 import { ElMessage, ElRadio, ElRadioGroup } from 'element-plus';
-import { useQRCode } from '@vueuse/integrations/useQRCode';
 import { useClipboard } from '@vueuse/core';
-import {
-  Cellphone,
-  RefreshLeft,
-  RefreshRight,
-  Position,
-  Delete,
-  Download,
-  Upload,
-} from '@element-plus/icons-vue';
-import { useVisualData, localKey } from '@/visual-editor/hooks/useVisualData';
+import { RefreshRight, Download, Upload } from '@element-plus/icons-vue';
+import { useVisualData } from '@/visual-editor/hooks/useVisualData';
 import { useModal } from '@/visual-editor/hooks/useModal';
 import MonacoEditor from '@/visual-editor/components/common/monaco-editor/MonacoEditor';
 import 'element-plus/es/components/message/style/css';
@@ -91,37 +82,6 @@ export const useTools = () => {
         },
       },
       {
-        title: '真机预览',
-        icon: Cellphone,
-        onClick: () => {
-          const qrcode = useQRCode(`${location.origin}/preview`);
-          useModal({
-            title: '预览二维码（暂不可用）',
-            props: {
-              width: 300,
-            },
-            footer: null,
-            content: () => (
-              <div class={'flex justify-center'}>
-                <img width={220} height={220} src={qrcode.value} />
-              </div>
-            ),
-          });
-        },
-      },
-      {
-        title: '撤销',
-        icon: RefreshLeft,
-        onClick: () => {
-          ElMessage({
-            showClose: true,
-            type: 'info',
-            duration: 2000,
-            message: '敬请期待！',
-          });
-        },
-      },
-      {
         title: '重做',
         icon: RefreshRight,
         onClick: () => {
@@ -131,26 +91,6 @@ export const useTools = () => {
             duration: 2000,
             message: '敬请期待！',
           });
-        },
-      },
-      {
-        title: '清空页面',
-        icon: Delete,
-        onClick: () => {
-          ElMessage({
-            showClose: true,
-            type: 'info',
-            duration: 2000,
-            message: '敬请期待！',
-          });
-        },
-      },
-      {
-        title: '预览',
-        icon: Position,
-        onClick: () => {
-          localStorage.setItem(localKey, JSON.stringify(jsonData));
-          window.open(location.href.replace('/#/', '/preview/#/'));
         },
       },
     ];
